@@ -55,11 +55,11 @@ isolated service / on new http:Listener(9090) {
             foreach var item in self.patientDataMap {
                 map<json> patientResponse = <map<json>>self.patientTemplate.clone();
                 patientResponse["id"] = item.id;
-                patientResponse["name"] = {
+                patientResponse["name"] = [{
                     use: "official",
                     given: [item.firstName],
                     family: item.lastName
-                };
+                }];
                 patientResponse["birthDate"] = item.birthDate;
                 patientResponse["managingOrganization"] = {
                     reference: item.managingOrganization
@@ -76,11 +76,11 @@ isolated service / on new http:Listener(9090) {
             if data is PatientData {
                 map<json> patientResponse = <map<json>>self.patientTemplate.clone();
                 patientResponse["id"] = data.id;
-                patientResponse["name"] = {
+                patientResponse["name"] = [{
                     use: "official",
                     given: [data.firstName],
                     family: data.lastName
-                };
+                }];
                 patientResponse["birthDate"] = data.birthDate;
                 patientResponse["managingOrganization"] = {
                     reference: data.managingOrganization
